@@ -9,9 +9,9 @@ namespace Tests.LeetCode.Medium;
 public class JumpGame
 {
     [Theory]
-    //[InlineData(new int[] { 2, 3, 1, 1, 4 }, true)]
-    //[InlineData(new int[] { 3, 2, 1, 0, 4 }, false)]
-    //[InlineData(new int[] { 2, 0 }, true)]
+    [InlineData(new int[] { 2, 3, 1, 1, 4 }, true)]
+    [InlineData(new int[] { 3, 2, 1, 0, 4 }, false)]
+    [InlineData(new int[] { 2, 0 }, true)]
     [InlineData(new int[] { 2, 5, 0, 0 }, true)]
     public void Given_WhenCanJump_Then(int[] nums, bool expected)
     {
@@ -31,21 +31,28 @@ public class JumpGame
     {
         int distanceToGo = nums.Length - 1;
 
-        return CanJumpInternal(nums, nums[0], distanceToGo);
+        return CanJumpInternal(nums, 0, distanceToGo);
     }
 
-    private static bool CanJumpInternal(int[] nums, int indexValue, int distanceToGo)
+    private static bool CanJumpInternal(int[] nums, int index, int distanceToGo)
     {
-        if (distanceToGo < 1 || indexValue >= distanceToGo)
+        if (distanceToGo < 1 || nums[index] >= distanceToGo)
         {
             return true;
         }
 
-        int[] range = GetJumpRange(nums[indexValue]);
+        int[] range = GetJumpRange(nums[index]);
         foreach (var i in range)
         {
             // i represents another range of jumps
-            return CanJumpInternal(nums, i, distanceToGo - i);
+            if (CanJumpInternal(nums, i + index, distanceToGo - i) == false)
+            {
+                continue;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         return false;
