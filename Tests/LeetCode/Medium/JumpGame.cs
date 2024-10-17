@@ -24,22 +24,50 @@ public class JumpGame
      * because if a branch exists, we should find it sooner
      */
 
+    [Theory]
+    [InlineData(new int[] { 2, 3, 1, 1, 4 }, true)]
+    [InlineData(new int[] { 3, 2, 1, 0, 4 }, false)]
+    [InlineData(new int[] { 2, 0 }, true)]
+    [InlineData(new int[] { 2, 5, 0, 0 }, true)]
+    [InlineData(new int[] { 2, 0, 0 }, true)]
+    [InlineData(new int[] { 1, 2, 3 }, true)]
+    public void Given_WhenCanJump_Then(int[] nums, bool expected)
+    {
+        bool result = CanJump(nums);
+        result.Should().Be(expected);
+    }
 
-    //[Theory]
-    //[InlineData(new int[] { 2, 3, 1, 1, 4 }, true)]
-    //[InlineData(new int[] { 3, 2, 1, 0, 4 }, false)]
-    //[InlineData(new int[] { 2, 0 }, true)]
-    //[InlineData(new int[] { 2, 5, 0, 0 }, true)]
-    //public void Given_WhenCanJump_Then(int[] nums, bool expected)
-    //{
-    //    bool result = CanJump(nums);
-    //    result.Should().Be(expected);
-    //}
+    public bool CanJump(int[] nums)
+    {
+        if (nums.Length < 2 || (nums.Length == 2 && nums[0] > 0))
+        {
+            return true;
+        }
 
-    //public bool CanJump(int[] nums)
-    //{
+        if (nums[0] == 0)
+        {
+            return false;
+        }
 
-    //}
+        bool canJump = false;
+        int jumpLength = 1;
+
+        for (int i = nums.Length - 2; i > -1; i--)
+        {
+            if (nums[i] >= jumpLength)
+            {
+                jumpLength = 1;
+                canJump = true;
+            }
+            else
+            {
+                canJump = false;
+                jumpLength++;
+            }
+        }
+
+        return canJump;
+    }
 
     [Theory]
     [InlineData(new int[] { 2, 3, 1, 1, 4 }, true)]
