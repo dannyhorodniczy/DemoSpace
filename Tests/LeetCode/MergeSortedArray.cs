@@ -1,28 +1,20 @@
+using FluentAssertions;
 using System;
+using Xunit;
 
 namespace Tests.LeetCode;
 
 // https://leetcode.com/problems/merge-sorted-array/
 public class MergeSortedArray
 {
-
-
-    //int[] nums1 = [1, 2, 3, 0, 0, 0];
-    //int m = 3;
-    //int[] nums2 = [2, 5, 6];
-    //int n  = 3;
-    //Merge(nums1, m, nums2, n);
-
-    //Console.WriteLine(string.Join(", ", nums1));
-
-
-    //int[] nums1 = [2, 0];
-    //int m = 1;
-    //int[] nums2 = [1];
-    //int n  = 1;
-    //Merge(nums1, m, nums2, n);
-
-    //Console.WriteLine(string.Join(", ", nums1));
+    [Theory]
+    [InlineData(new int[] { 1, 2, 3, 0, 0, 0 }, 3, new int[] { 2, 5, 6 }, 3, new int[] { 1, 2, 2, 3, 5, 6 })]
+    [InlineData(new int[] { 2, 0 }, 1, new int[] { 1 }, 1, new int[] { 1, 2 })]
+    public void Given_WhenMerge_Then(int[] nums1, int m, int[] nums2, int n, int[] expected)
+    {
+        Merge(nums1, m, nums2, n);
+        nums1.Should().BeEquivalentTo(expected, o => o.WithStrictOrdering());
+    }
 
     public static void Merge(int[] nums1, int m, int[] nums2, int n)
     {
