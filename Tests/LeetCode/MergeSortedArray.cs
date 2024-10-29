@@ -16,7 +16,7 @@ public class MergeSortedArray
         nums1.Should().BeEquivalentTo(expected, o => o.WithStrictOrdering());
     }
 
-    public static void Merge(int[] nums1, int m, int[] nums2, int n)
+    private static void Merge(int[] nums1, int m, int[] nums2, int n)
     {
         if (m == 0)
         {
