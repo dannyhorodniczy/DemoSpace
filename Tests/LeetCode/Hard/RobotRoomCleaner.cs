@@ -8,20 +8,6 @@ namespace Tests.LeetCode.Hard;
 // https://leetcode.ca/all/489.html
 public class RobotRoomCleaner
 {
-    private static int[][] Room = [
-                                    [1,1,1,1,1,0,1,1],
-                                    [1,1,1,1,1,0,1,1],
-                                    [1,0,1,1,1,1,1,1],
-                                    [0,0,0,1,0,0,0,0],
-                                    [1,1,1,1,1,1,1,1]
-                                  ];
-
-    private static readonly int[][] Directions = [
-                                                  [-1, 0], // up 0
-                                                  [0, 1],  // right 1
-                                                  [1, 0],  // down 2
-                                                  [0, -1]  // left 3
-                                                 ];
     [Fact]
     public void GivenARoomaAndARoomba_WhenCleanRoom_ThenTheRoomIsCleaned()
     {
@@ -96,4 +82,19 @@ public class RobotRoomCleaner
             roomba.TurnRight();
         }
     }
+
+    private static int[][] Room = [
+                                [1,1,1,1,1,0,1,1],
+                                    [1,1,1,1,1,0,1,1],
+                                    [1,0,1,1,1,1,1,1],
+                                    [0,0,0,1,0,0,0,0],
+                                    [1,1,1,1,1,1,1,1]
+                              ];
+
+    private static readonly int[][] Directions = [
+                                                  [-1, 0], // up 0
+                                                  [0, 1],  // right 1
+                                                  [1, 0],  // down 2
+                                                  [0, -1]  // left 3
+                                                 ];
 }
