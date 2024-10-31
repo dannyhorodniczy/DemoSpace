@@ -2,7 +2,7 @@ using FluentAssertions;
 using System;
 using Xunit;
 
-namespace Tests.LeetCode;
+namespace Tests.LeetCode.Easy;
 
 // https://leetcode.com/problems/merge-sorted-array/
 public class MergeSortedArray

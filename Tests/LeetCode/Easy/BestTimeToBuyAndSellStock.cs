@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace Tests.LeetCode;
+namespace Tests.LeetCode.Easy;
 
 // https://leetcode.com/problems/best-time-to-buy-and-sell-stock
 public class BestTimeToBuyAndSellStock

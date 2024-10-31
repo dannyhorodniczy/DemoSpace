@@ -1,4 +1,4 @@
-namespace Tests.LeetCode;
+namespace Tests.LeetCode.Easy;
 
 // https://leetcode.com/problems/merge-two-sorted-lists/
 // Definition for singly-linked list.

@@ -1,7 +1,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace Tests.LeetCode;
+namespace Tests.LeetCode.Medium;
 
 // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii
 public class BestTimeToBuyAndSellStock2

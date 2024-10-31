@@ -2,7 +2,7 @@ using FluentAssertions;
 using System.Collections.Generic;
 using Xunit;
 
-namespace Tests.LeetCode;
+namespace Tests.LeetCode.Easy;
 
 // https://leetcode.com/problems/majority-element
 public class MajorityElementClass
