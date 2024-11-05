@@ -1,13 +1,50 @@
-using FluentAssertions;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using Xunit;
 
 namespace Tests.LeetCode.Hard;
 
 // https://leetcode.ca/all/489.html
+/* The Roomba algorithm
+ * This algorithm will use the IRobot API to clean a 2D room
+ *
+ * To start, we need a list of visited locations (hashset in this case for fast lookup)
+ * and a list of directions (can be CW or CCW)
+ *
+ * This will be a recursive algorithm performing a DFS algorithm
+ * The function will accept the robot, the current position, the visited spaces, and the direction
+ * Upon entering the function, the robot will:
+ * 1. Clean the current space
+ * 2. Add it to the list of visited spaces
+ * 3. Enter a loop of the 4 directions (CW or CCW) that you have defined
+ * 4. Compute the next direction for the robot nextDir = (dir + i) % 4 (so we maintain orientation)
+ * 5. Compute the next position with the new direction
+ * 6. Check to see if the new position is valid: (not a wall, not visited)
+ * 7. If valid: call the function again with the new direction
+ * --> Backtrack while maintaining orientation
+ * 8. If invalid: turn in the chosen direction (CW (right) or CCW (left))
+ */
+
 public class RobotRoomCleaner
 {
+    private static readonly int[][] Room =
+    [
+        [1, 1, 1, 1, 1, 0, 1, 1],
+        [1, 1, 1, 1, 1, 0, 1, 1],
+        [1, 0, 1, 1, 1, 1, 1, 1],
+        [0, 0, 0, 1, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 1, 1, 1]
+    ];
+
+    private static readonly int[][] Directions =
+    [
+        [-1, 0], // up 0
+        [0, 1], // right 1
+        [1, 0], // down 2
+        [0, -1] // left 3
+    ];
+
     [Fact]
     public void GivenARoomaAndARoomba_WhenCleanRoom_ThenTheRoomIsCleaned()
     {
@@ -60,7 +97,7 @@ public class RobotRoomCleaner
         roomba.Clean();
         visited.Add((row, column));
 
-        for (int i = 0; i < Directions.Length; i++)
+        for (var i = 0; i < Directions.Length; i++)
         {
             int newDirection = (direction + i) % Directions.Length;
             int newRow = row + Directions[newDirection][0];
@@ -82,19 +119,4 @@ public class RobotRoomCleaner
             roomba.TurnRight();
         }
     }
-
-    private static int[][] Room = [
-                                [1,1,1,1,1,0,1,1],
-                                    [1,1,1,1,1,0,1,1],
-                                    [1,0,1,1,1,1,1,1],
-                                    [0,0,0,1,0,0,0,0],
-                                    [1,1,1,1,1,1,1,1]
-                              ];
-
-    private static readonly int[][] Directions = [
-                                                  [-1, 0], // up 0
-                                                  [0, 1],  // right 1
-                                                  [1, 0],  // down 2
-                                                  [0, -1]  // left 3
-                                                 ];
 }
