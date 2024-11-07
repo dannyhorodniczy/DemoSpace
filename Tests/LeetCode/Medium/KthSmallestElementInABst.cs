@@ -14,7 +14,7 @@ public class KthSmallestElementInABst
     {
         int?[] nums = [3, 1, 4, null, 2];
         var root = BstBuilder.ConstructBst(nums);
-        int? result = new MyActualSolution().KthSmallest(root, k);
+        int? result = new PracticeSolution().KthSmallest(root, k);
         result.Should().Be(expected);
     }
 
@@ -24,8 +24,74 @@ public class KthSmallestElementInABst
     {
         int?[] nums = [5, 3, 6, 2, 4, null, null, 1];
         var root = BstBuilder.ConstructBst(nums);
-        int? result = new MyActualSolution().KthSmallest(root, k);
+        int? result = new PracticeSolution().KthSmallest(root, k);
         result.Should().Be(expected);
+    }
+
+    [Theory]
+    [InlineData(3, 3)]
+    public void Given_When_Then3(int k, int expected)
+    {
+        int?[] nums = [2, 1, 3];
+        var root = BstBuilder.ConstructBst(nums);
+        int? result = new PracticeSolution().KthSmallest(root, k);
+        result.Should().Be(expected);
+    }
+}
+
+public class PracticeSolution
+{
+    // ok so there is the default in order traversal way of doing this
+    // I will memorize it at some points
+    // but right now, I don't care
+    //
+    // let's think about a binary tree structure
+    // to find the smallest (1st) element, go left until you can't
+    // then go right, and left again until you can't (that's the next)
+    // if you cannot go right, you go up (that's the next)
+
+    public int KthSmallest(TreeNode root, int k)
+    {
+        // setup
+        int count = 0;
+        int kthSmallest = 0;
+        var current = root;
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+
+    GoLeft:
+        while (current.left != null)
+        {
+            stack.Push(current);
+            current = current.left;
+        }
+
+        count++;
+        if (count == k)
+        {
+            return current.val;
+        }
+
+        if (current.right != null)
+        {
+            current = current.right;
+            goto GoLeft;
+        }
+
+        // we need to backtrack
+        do
+        {
+            current = stack.Pop();
+
+            count++;
+            if (count == k)
+            {
+                return current.val;
+            }
+
+        } while (current.right == null);
+
+        current = current.right;
+        goto GoLeft;
     }
 }
 
