@@ -49,8 +49,11 @@ public class BestTimeToBuyAndSellStock3
      * 1. Compute the largest difference & period
      * 2. Compute the next largest difference & period
      * if no overlap, return
-     * if overlap:
+     * if overlap: goto 2
+     * how do we compare periods?
      * 3. Compute the next largest difference & period
+     * 
+     * should we compute all possible profits
      * 
      * The answer is dynamic programming, and it's related to optimization
      */
