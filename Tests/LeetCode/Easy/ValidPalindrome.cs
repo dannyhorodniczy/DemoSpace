@@ -15,11 +15,40 @@ public class ValidPalindrome
     [InlineData("0P", false)]
     public void Given_WhenMaxProfit_Then(string s, bool expected)
     {
-        bool result = IsPalindrome(s);
+        bool result = IsPalindrome2Pointers(s);
         result.Should().Be(expected);
     }
 
-    public bool IsPalindrome(string s)
+    public bool IsPalindrome2Pointers(string s)
+    {
+        /*
+         * let's start with our approach
+         * 1. Sanitize the string (all lower alphanumeric chars)
+         * 2. Find the midpoint
+         * 3. slice the last array correctly, compare it with the 1st array
+         */
+
+        string sanitized = new string(s.Where(x => char.IsLetter(x) || char.IsNumber(x)).ToArray()).ToLower();
+        int subArrayLength = (int) (sanitized.Length / 2);
+        int p1 = 0;
+        int p2 = sanitized.Length - 1;
+        while (p1 < subArrayLength)
+        {
+            if (sanitized[p1] == sanitized[p2])
+            {
+                p1++;
+                p2--;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public bool IsPalindromeIntuitive(string s)
     {
         /*
          * let's start with our approach
