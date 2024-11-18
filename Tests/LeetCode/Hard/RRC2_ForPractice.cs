@@ -1,5 +1,5 @@
-using System.Linq;
 using FluentAssertions;
+using System.Linq;
 using Xunit;
 
 namespace Tests.LeetCode.Hard;
@@ -27,7 +27,7 @@ public class RRC2_ForPractice
         CleanRoom(roomba);
 
         // Then
-        roomba.RoomState.Any(x => x.Any(y => y == 1)).Should().BeFalse();
+        roomba.RoomState.SelectMany(x => x).Any(y => y == 1).Should().BeFalse();
 
         int cleanCountAfter = roomba.RoomState.SelectMany(x => x).Where(x => x == 2).Count();
         int wallCountAfter = roomba.RoomState.SelectMany(x => x).Where(x => x == 0).Count();
@@ -57,5 +57,6 @@ public class RRC2_ForPractice
         wallCountBefore.Should().Be(wallCountAfter);
     }
 
-    private static void CleanRoom(IRobot robot) { }
+    private static void CleanRoom(IRobot robot)
+    { }
 }
