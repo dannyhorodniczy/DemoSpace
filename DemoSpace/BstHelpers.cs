@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Tests.LeetCode.Medium;
+namespace DemoSpace;
 public class TreeNode
 {
     public int val;
