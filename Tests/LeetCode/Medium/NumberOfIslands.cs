@@ -9,9 +9,8 @@ namespace Tests.LeetCode.Medium;
 
 public class NumberOfIslands
 {
-    [Theory]
-    [InlineData(1)]
-    public void Given_WhenNumIslands_Then(int ans)
+    [Fact]
+    public void Given_WhenNumIslands_Then()
     {
         char[][] grid = [
   ['1','1','1','1','0'],
@@ -20,12 +19,11 @@ public class NumberOfIslands
   ['0','0','0','0','0']
 ];
         int result = NumIslands(grid);
-        result.Should().Be(ans);
+        result.Should().Be(1);
     }
 
-    [Theory]
-    [InlineData(3)]
-    public void Given_WhenNumIslands_Then2(int ans)
+    [Fact]
+    public void Given_WhenNumIslands_Then2()
     {
         char[][] grid = [
   ['1','1','0','0','0'],
@@ -34,12 +32,11 @@ public class NumberOfIslands
   ['0','0','0','1','1']
 ];
         int result = NumIslands(grid);
-        result.Should().Be(ans);
+        result.Should().Be(3);
     }
 
-    [Theory]
-    [InlineData(1)]
-    public void Given_WhenNumIslands_Then3(int ans)
+    [Fact]
+    public void Given_WhenNumIslands_Then3()
     {
         char[][] grid = [
   ['1','1','1'],
@@ -47,7 +44,7 @@ public class NumberOfIslands
   ['0','1','0']
 ];
         int result = NumIslands(grid);
-        result.Should().Be(ans);
+        result.Should().Be(1);
     }
 
     private int NumIslands(char[][] grid)
