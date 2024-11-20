@@ -69,7 +69,7 @@ public class NumberOfIslands
                     continue;
                 }
 
-                if (grid[row][column] == '1')// || grid[row][column] == '2')
+                if (grid[row][column] == '1')
                 {
                     // DFS
                     Dfs(directions, grid, visited, 0, row, column, grid.Length - 1, grid[0].Length - 1);
@@ -93,7 +93,7 @@ public class NumberOfIslands
         visited.Add((row, column));
         grid[row][column] = '2';
         Console.WriteLine($"Current direction: {(Dir) direction}");
-        Print(grid, row, column);
+        Print(grid, visited, row, column);
 
         for (int i = 0; i < 4; i++)
         {
@@ -162,7 +162,7 @@ public class NumberOfIslands
         Up, Right, Down, Left
     }
 
-    private static void Print(char[][] grid, int row, int column)
+    private static void Print(char[][] grid, HashSet<(int, int)> visited, int row, int column)
     {
         //Console.WriteLine();
         //Console.WriteLine($'Cleaned Row: {row}, Column: {column}');
@@ -179,7 +179,7 @@ public class NumberOfIslands
                     Console.Write(grid[i][j]);
                 }
                 // visited place
-                else if (grid[i][j] == '2')
+                else if (visited.Contains((i, j)))
                 {
                     Console.BackgroundColor = ConsoleColor.Green;
                     Console.Write(grid[i][j]);
