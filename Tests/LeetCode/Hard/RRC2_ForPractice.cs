@@ -4,6 +4,8 @@ using Xunit;
 
 namespace Tests.LeetCode.Hard;
 
+// https://leetcode.ca/all/489.html
+
 public class RRC2_ForPractice
 {
     private static readonly int[][] Room =
