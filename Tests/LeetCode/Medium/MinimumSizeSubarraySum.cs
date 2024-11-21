@@ -1,13 +1,10 @@
 using FluentAssertions;
 using System;
-using System.Linq;
 using Xunit;
 
 namespace Tests.LeetCode.Medium;
 
 // https://leetcode.com/problems/minimum-size-subarray-sum/
-
-// This does work, but it's too slow on leetcode
 
 public class MinimumSizeSubarraySum
 {
@@ -23,43 +20,24 @@ public class MinimumSizeSubarraySum
 
     private static int MinSubArrayLen(int target, int[] nums)
     {
-        int minWindowSize = int.MaxValue;
-        int start = 0;
-        int end = 0;
-        bool targetHit = false;
+        int n = nums.Length;
+        int minLength = int.MaxValue;
+        int left = 0;
+        int sum = 0;
 
-        while (end < nums.Length)
+        for (int right = 0; right < n; right++)
         {
-            //int[] window = nums[start..(end + 1)];
-            var window = nums.Skip(start).Take((end - start) + 1);
-            int sum = window.Sum();
+            sum += nums[right];
 
-            if (sum >= target)
+            while (sum >= target)
             {
-                //if (window.Count() == 1)
-                //{
-                //    return 1;
-                //}
-
-                // shift the window
-                // only increment the end if the targetHit == false
-                if (targetHit == false && end != (nums.Length - 1))
-                {
-                    end++;
-                }
-                start++;
-
-
-                targetHit = true;
-                minWindowSize = window.Count() < minWindowSize ? window.Count() : minWindowSize;
-                continue;
+                minLength = Math.Min(minLength, right - left + 1);
+                sum -= nums[left];
+                left++;
             }
-
-            targetHit = false;
-            end++;
         }
 
-        return minWindowSize == int.MaxValue ? 0 : minWindowSize;
+        return minLength == int.MaxValue ? 0 : minLength;
     }
 
     /*
