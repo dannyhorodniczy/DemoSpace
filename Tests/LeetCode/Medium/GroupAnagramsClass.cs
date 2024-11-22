@@ -6,6 +6,7 @@ using Xunit;
 namespace Tests.LeetCode.Medium;
 
 // https://leetcode.com/problems/group-anagrams/
+// slow but it works
 
 public class GroupAnagramsClass
 {
