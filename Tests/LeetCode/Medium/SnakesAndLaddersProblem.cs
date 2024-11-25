@@ -18,6 +18,25 @@ public class SnakesAndLaddersProblem
      * which is exactly what we are trying to do here
      */
 
+    /*
+ * ok, we are trying to find the minimum number of dice rolls to
+ * complete various snakes and ladders board
+ * we can think of the data structure as an unweighted graph (should probably learn about weighted graphs)
+ * we will use BFS to calculate the minimum dice rolls
+ * BFS is how we find the 1st leaf fastest (picture a binary tree, do BFS, this will find the closest leaf)
+ * 
+ * in this case, each set of possible moves can be thought of as a tree level
+ * so:
+ * 0. define a set of visited spaces (need this to make sure we don't go in circles)
+ * 1. load your queue with a level, add the level to visited
+ * 2. while queue.Count > 0
+ * 3. foreach node in a level
+ * --> check if we have finished, if yes, return
+ * --> calculate the next possible moves, account for snakes/ladders
+ * --> if we have not visited the next possible move, add it to visited, enqueue it
+ * 4. at the end of each level (the foreach) increment the roll count
+ */
+
     [Fact]
     public void Given_WhenSnakesAndLadders_Then()
     {
