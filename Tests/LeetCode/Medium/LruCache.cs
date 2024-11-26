@@ -51,26 +51,25 @@ public class LruCache
 
 public class LRUCache
 {
-    private readonly Dictionary<int, (int value, int rank, int key)> _dictionary;
     private readonly int _capacity;
-    private int _rank = -1;
+    private readonly Dictionary<int, LinkedListNode<KeyValuePair<int, int>>> _cache;
+    private readonly LinkedList<KeyValuePair<int, int>> _cacheList;
 
     public LRUCache(int capacity)
     {
         _capacity = capacity;
-        _dictionary = new Dictionary<int, (int, int, int)>(_capacity);
-        _dictionary.EnsureCapacity(_capacity);
+        _cache = new(_capacity);
+        _cacheList = new();
     }
 
     public int Get(int key)
     {
-        if (_dictionary.TryGetValue(key, out var vrk))
+        if (_cache.TryGetValue(key, out var node))
         {
-            // mark the key as recently used
-            _rank++;
-            _dictionary[key] = (vrk.value, _rank, key);
-
-            return vrk.value;
+            _cacheList.Remove(node);
+            var newNode = new KeyValuePair<int, int>(node.Value.Key, node.Value.Value);
+            _cache[key] = _cacheList.AddFirst(newNode);
+            return newNode.Value;
         }
 
         return -1;
@@ -78,28 +77,76 @@ public class LRUCache
 
     public void Put(int key, int value)
     {
-        if (_dictionary.ContainsKey(key))
+        if (_cache.TryGetValue(key, out var node))
         {
-            _dictionary.Remove(key);
-        }
-        else if (_dictionary.Count == _capacity)
-        {
-            // is the cache at capacity?
-            // yes: remove the lowest rank
-            (int value, int rank, int key) lowestVrk = (0, _rank, 0);
-            foreach (var vrk in _dictionary.Values)
-            {
-                if (vrk.rank <= lowestVrk.Item2)
-                {
-                    lowestVrk = vrk;
-                }
-            }
-
-            _dictionary.Remove(lowestVrk.key);
+            _cacheList.Remove(node);
+            var tempNode = new KeyValuePair<int, int>(key, value);
+            _cache[key] = _cacheList.AddFirst(tempNode);
+            return;
         }
 
-        // in all cases: add the new kvp and rank as most recent
-        _rank++;
-        _dictionary[key] = (value, _rank, key);
+        if (_capacity == _cache.Count)
+        {
+            _cache.Remove(_cacheList.Last.Value.Key);
+            _cacheList.RemoveLast();
+        }
+
+        var newNode = new KeyValuePair<int, int>(key, value);
+        _cache[key] = _cacheList.AddFirst(newNode);
     }
 }
+
+//public class LRUCache
+//{
+//    private readonly Dictionary<int, (int value, int rank, int key)> _dictionary;
+//    private readonly int _capacity;
+//    private int _rank = -1;
+
+//    public LRUCache(int capacity)
+//    {
+//        _capacity = capacity;
+//        _dictionary = new Dictionary<int, (int, int, int)>(_capacity);
+//        _dictionary.EnsureCapacity(_capacity);
+//    }
+
+//    public int Get(int key)
+//    {
+//        if (_dictionary.TryGetValue(key, out var vrk))
+//        {
+//            // mark the key as recently used
+//            _rank++;
+//            _dictionary[key] = (vrk.value, _rank, key);
+
+//            return vrk.value;
+//        }
+
+//        return -1;
+//    }
+
+//    public void Put(int key, int value)
+//    {
+//        if (_dictionary.ContainsKey(key))
+//        {
+//            _dictionary.Remove(key);
+//        }
+//        else if (_dictionary.Count == _capacity)
+//        {
+//            // is the cache at capacity?
+//            // yes: remove the lowest rank
+//            (int value, int rank, int key) lowestVrk = (0, _rank, 0);
+//            foreach (var vrk in _dictionary.Values)
+//            {
+//                if (vrk.rank <= lowestVrk.Item2)
+//                {
+//                    lowestVrk = vrk;
+//                }
+//            }
+
+//            _dictionary.Remove(lowestVrk.key);
+//        }
+
+//        // in all cases: add the new kvp and rank as most recent
+//        _rank++;
+//        _dictionary[key] = (value, _rank, key);
+//    }
+//}
