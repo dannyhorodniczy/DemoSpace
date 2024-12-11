@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace Tests.LeetCode;
+namespace Tests.Practice;
 
 // given a 2d array of prices of stocks of different company over 7 days. Find the 3 top company with the highest averages.
 
@@ -13,7 +13,7 @@ public class Given2dArrayOfStocksOfCompaniesOver7Days
     {
         var stocks = BuildStocksArray();
 
-        (int company, double avg)[] companyAverages = new (int company, double avg)[stocks.Length];
+        var companyAverages = new (int company, double avg)[stocks.Length];
 
         for (int i = 0; i < stocks.Length; i++)
         {
@@ -33,7 +33,7 @@ public class Given2dArrayOfStocksOfCompaniesOver7Days
 
     private static int[][] BuildStocksArray(int companyCount = 20)
     {
-        Random rnd = new Random();
+        var rnd = new Random();
         int[][] stocks = new int[companyCount][]; // [company, day_of_week]
         for (int i = 0; i < stocks.Length; i++)
         {

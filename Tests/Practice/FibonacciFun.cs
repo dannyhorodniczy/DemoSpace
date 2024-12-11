@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Xunit;
 
-namespace Tests.LeetCode;
+namespace Tests.Practice;
 public class FibonacciFun
 {
     [Theory]
