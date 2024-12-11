@@ -163,3 +163,90 @@ public class Wordle
         return printStatus;
     }
 }
+
+// Main function implementation
+
+// 5 guesses at a 5 letter word
+//    for (int i = 0; i < 5; i++)
+//    {
+//        string input = string.Empty;
+
+//        while (true)
+//        {
+//            input = Console.ReadLine();
+//            if (string.IsNullOrWhiteSpace(input))
+//            {
+//                Console.WriteLine("Invalid input");
+//                continue;
+//            }
+
+//            input = input.Trim().ToLower();
+
+//            if (input.Length != 5)
+//            {
+//                Console.WriteLine("Invalid input");
+//                continue;
+//            }
+
+//            break;
+//        }
+
+//        int[] printStatus = new int[5];
+//        // 0 = nothing
+//        // 1 correct char
+//        // 2 correct char and location
+//        var remainingWordChars = new List<char>();
+//        var remainingInputChars = new List<char>();
+//        for (int j = 0; j < 5; j++)
+//        {
+//            if (input[j] == theWord[j])
+//            {
+//                printStatus[j] = 2;
+//            }
+//            else
+//            {
+//                remainingWordChars.Add(theWord[j]);
+//                remainingInputChars.Add(input[j]);
+//            }
+//        }
+
+//        var arr = remainingInputChars.ToArray();
+//        for (int j = 0; j < arr.Length; j++)
+//        {
+//            if (remainingWordChars.Contains(arr[j]))
+//            {
+//                printStatus[j] = 1;
+//            }
+//        }
+
+//        for (int j = 0; j < 5; j++)
+//        {
+//            if (printStatus[j] == 1)
+//            {
+//                Console.BackgroundColor = ConsoleColor.Yellow;
+//                Console.Write(input[j]);
+//                Console.BackgroundColor = ConsoleColor.Black;
+//                continue;
+//            }
+
+//            if (printStatus[j] == 2)
+//            {
+//                Console.BackgroundColor = ConsoleColor.Green;
+//                Console.Write(input[j]);
+//                Console.BackgroundColor = ConsoleColor.Black;
+//                continue;
+//            }
+
+//            Console.Write(input[j]);
+//        }
+
+//        if (printStatus.Length == 5 && printStatus.All(x => x == 2))
+//        {
+//            Console.WriteLine();
+//            Console.WriteLine("You win!");
+//            break;
+//        }
+
+//        Console.WriteLine();
+//    }
+//}
