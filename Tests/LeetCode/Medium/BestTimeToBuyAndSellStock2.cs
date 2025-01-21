@@ -10,13 +10,52 @@ public class BestTimeToBuyAndSellStock2
     [InlineData(new int[] { 7, 1, 5, 3, 6, 4 }, 7)]
     [InlineData(new int[] { 1, 2, 3, 4, 5 }, 4)]
     [InlineData(new int[] { 7, 6, 4, 3, 1 }, 0)]
+    [InlineData(new int[] { 6, 1, 3, 2, 4, 7 }, 7)]
     public void Given_WhenMaxProfit_Then(int[] nums, int profit)
     {
         int result = MaxProfit(nums);
         result.Should().Be(profit);
     }
 
-    public int MaxProfit(int[] prices)
+    private static int MaxProfit(int[] prices)
+    {
+        int maxProfit = 0;
+        int tempMaxProfit = 0;
+
+        int i = 0;
+        int j = 1;
+        while (j < prices.Length)
+        {
+            int possibleMaxProfit = prices[j] - prices[i];
+            if (possibleMaxProfit > tempMaxProfit)
+            {
+                tempMaxProfit = possibleMaxProfit;
+            }
+            else
+            {
+                maxProfit += tempMaxProfit;
+                tempMaxProfit = 0;
+                i = j;
+            }
+
+            j++;
+        }
+
+        return maxProfit + tempMaxProfit;
+    }
+
+    [Theory]
+    [InlineData(new int[] { 7, 1, 5, 3, 6, 4 }, 7)]
+    [InlineData(new int[] { 1, 2, 3, 4, 5 }, 4)]
+    [InlineData(new int[] { 7, 6, 4, 3, 1 }, 0)]
+    [InlineData(new int[] { 6, 1, 3, 2, 4, 7 }, 7)]
+    public void Given_WhenMaxProfit2_Then(int[] nums, int profit)
+    {
+        int result = MaxProfit2(nums);
+        result.Should().Be(profit);
+    }
+
+    public int MaxProfit2(int[] prices)
     {
         /*
          * I remember that my initial solution was not a filter
