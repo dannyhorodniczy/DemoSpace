@@ -19,6 +19,30 @@ public class BestTimeToBuyAndSellStock
         result.Should().Be(profit);
     }
 
+    private static int MaxProfit(int[] prices)
+    {
+        int maxProfit = 0;
+
+        int i = 0;
+        int j = 1;
+        while (j < prices.Length)
+        {
+            int possibleMaxProfit = prices[j] - prices[i];
+            if (possibleMaxProfit > maxProfit)
+            {
+                maxProfit = possibleMaxProfit;
+            }
+            else if (possibleMaxProfit < 0)
+            {
+                i = j;
+            }
+
+            j++;
+        }
+
+        return maxProfit;
+    }
+
     [Theory]
     [InlineData(new int[] { 7, 1, 5, 3, 6, 4 }, 5)]
     [InlineData(new int[] { 7, 6, 4, 3, 1 }, 0)]
@@ -30,7 +54,40 @@ public class BestTimeToBuyAndSellStock
         result.Should().Be(profit);
     }
 
-    public static int MaxProfit(int[] prices)
+    public static int MaxProfitWayBetter(int[] prices)
+    {
+        int min = int.MaxValue;
+        int maxProfit = 0;
+
+        foreach (int price in prices)
+        {
+            if (price < min)
+            {
+                min = price;
+            }
+
+            int possibleProfit = price - min;
+            if (maxProfit < possibleProfit)
+            {
+                maxProfit = possibleProfit;
+            }
+        }
+
+        return maxProfit;
+    }
+
+    [Theory]
+    [InlineData(new int[] { 7, 1, 5, 3, 6, 4 }, 5)]
+    [InlineData(new int[] { 7, 6, 4, 3, 1 }, 0)]
+    [InlineData(new int[] { 7, 2, 4, 1 }, 2)]
+    [InlineData(new int[] { 11, 2, 7, 1, 4 }, 5)]
+    public void Given_WhenMaxProfitLessLessGood_Then(int[] nums, int profit)
+    {
+        int result = MaxProfitLessLessGood(nums);
+        result.Should().Be(profit);
+    }
+
+    public static int MaxProfitLessLessGood(int[] prices)
     {
         // 1. find the largest value
         // 2. find the largest (postive) difference between a future day and a past day
@@ -73,28 +130,5 @@ public class BestTimeToBuyAndSellStock
 
         int[] maxes = [possibleMax1, possibleMax2, possibleMax3];
         return maxes.Max();
-    }
-
-    // way better solution
-    public static int MaxProfitWayBetter(int[] prices)
-    {
-        int min = int.MaxValue;
-        int maxProfit = 0;
-
-        foreach (int price in prices)
-        {
-            if (price < min)
-            {
-                min = price;
-            }
-
-            int possibleProfit = price - min;
-            if (maxProfit < possibleProfit)
-            {
-                maxProfit = possibleProfit;
-            }
-        }
-
-        return maxProfit;
     }
 }
