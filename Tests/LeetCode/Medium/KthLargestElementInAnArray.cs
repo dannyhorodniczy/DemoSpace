@@ -21,6 +21,35 @@ public class KthLargestElementInAnArray
 
     private static int FindKthLargest(int[] nums, int k)
     {
+        PriorityQueue<int, int> _minHeap = new(k);
+
+        for (int i = 0; i < k; i++)
+        {
+            _minHeap.Enqueue(nums[i], nums[i]);
+        }
+
+        for (int i = k; i < nums.Length; i++)
+        {
+            if (nums[i] > _minHeap.Peek())
+            {
+                _minHeap.DequeueEnqueue(nums[i], nums[i]);
+            }
+        }
+
+        return _minHeap.Peek();
+    }
+
+    [Theory]
+    [InlineData(new int[] { 3, 2, 1, 5, 6, 4 }, 2, 5)]
+    [InlineData(new int[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 }, 4, 4)]
+    public void Given_WhenFindKthLargestOld_Then(int[] nums, int k, int expected)
+    {
+        int result = FindKthLargestOld(nums, k);
+        result.Should().Be(expected);
+    }
+
+    private static int FindKthLargestOld(int[] nums, int k)
+    {
         if (nums.Length == 0)
         {
             return 0;
