@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Xunit;
 
 namespace Tests.LeetCode.Easy;
+
+// https://leetcode.com/explore/interview/card/google/67/sql-2/3044/
+
 public class UniqueEmailAddresses
 {
     [Theory]
@@ -28,7 +31,6 @@ public class UniqueEmailAddresses
 
         foreach (string email in emails)
         {
-            // get the domain name
             var split = email.Split('@');
 
             var domainName = split[1];
