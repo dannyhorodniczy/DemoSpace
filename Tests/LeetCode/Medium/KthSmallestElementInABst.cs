@@ -14,7 +14,7 @@ public class KthSmallestElementInABst
     public void Given_When_Then(int k, int expected)
     {
         int?[] nums = [3, 1, 4, null, 2];
-        var root = BstBuilder.ConstructBst(nums);
+        var root = BstHelper.ConstructBst(nums);
         int? result = new PracticeSolution().KthSmallest(root, k);
         result.Should().Be(expected);
     }
@@ -24,7 +24,7 @@ public class KthSmallestElementInABst
     public void Given_When_Then2(int k, int expected)
     {
         int?[] nums = [5, 3, 6, 2, 4, null, null, 1];
-        var root = BstBuilder.ConstructBst(nums);
+        var root = BstHelper.ConstructBst(nums);
         int? result = new PracticeSolution().KthSmallest(root, k);
         result.Should().Be(expected);
     }
@@ -34,7 +34,7 @@ public class KthSmallestElementInABst
     public void Given_When_Then3(int k, int expected)
     {
         int?[] nums = [2, 1, 3];
-        var root = BstBuilder.ConstructBst(nums);
+        var root = BstHelper.ConstructBst(nums);
         int? result = new PracticeSolution().KthSmallest(root, k);
         result.Should().Be(expected);
     }

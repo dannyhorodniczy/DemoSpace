@@ -14,7 +14,7 @@ public class TreeNode
     }
 }
 
-public static class BstBuilder
+public static class BstHelper
 {
     public static TreeNode ConstructBst(int?[] nums)
     {
@@ -59,5 +59,47 @@ public static class BstBuilder
         }
 
         return root;
+    }
+
+    public static int?[] DeconstructBst(TreeNode root)
+    {
+        if (root == null)
+        {
+            return new int?[] { };
+        }
+
+        List<int?> result = new List<int?>();
+        Queue<TreeNode> queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+
+        while (queue.Count > 0)
+        {
+            var current = queue.Dequeue();
+            if (current != null)
+            {
+                result.Add(current.val);
+                queue.Enqueue(current.left);
+                queue.Enqueue(current.right);
+            }
+            else
+            {
+                result.Add(null);
+            }
+        }
+
+        // Remove trailing nulls
+        for (int i = result.Count - 1; i >= 0; i--)
+        {
+            if (result[i] == null)
+            {
+                result.RemoveAt(i);
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return result.ToArray();
     }
 }

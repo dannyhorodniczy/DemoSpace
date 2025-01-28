@@ -16,7 +16,7 @@ public class MaximumDepthOfABinaryTree
     {
         // Given
         int?[] nums = [3, 9, 20, null, null, 15, 7];
-        var root = BstBuilder.ConstructBst(nums);
+        var root = BstHelper.ConstructBst(nums);
 
         // When
         int result = MaxDepthDFS(root);
@@ -33,7 +33,7 @@ public class MaximumDepthOfABinaryTree
     {
         // Given
         int?[] nums = [1, null, 2];
-        var root = BstBuilder.ConstructBst(nums);
+        var root = BstHelper.ConstructBst(nums);
 
         // When
         int result = MaxDepthDFS(root);
@@ -50,7 +50,7 @@ public class MaximumDepthOfABinaryTree
     {
         // Given
         int?[] nums = [];
-        var root = BstBuilder.ConstructBst(nums);
+        var root = BstHelper.ConstructBst(nums);
 
         // When
         int result = MaxDepthDFS(root);
@@ -67,7 +67,7 @@ public class MaximumDepthOfABinaryTree
     {
         // Given
         int?[] nums = [0, 2, 4, 1, null, 3, -1, 5, 1, null, 6, null, 8];
-        var root = BstBuilder.ConstructBst(nums);
+        var root = BstHelper.ConstructBst(nums);
 
         // When
         int result = MaxDepthDFS(root);
