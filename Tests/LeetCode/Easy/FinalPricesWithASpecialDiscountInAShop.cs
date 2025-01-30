@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using Xunit;
 
 namespace Tests.LeetCode.Easy;
+
+// https://leetcode.com/problems/final-prices-with-a-special-discount-in-a-shop/
+
 public class FinalPricesWithASpecialDiscountInAShop
 {
     [Theory]
