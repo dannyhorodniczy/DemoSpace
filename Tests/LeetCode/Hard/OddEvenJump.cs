@@ -37,6 +37,7 @@ public class OddEvenJump
     [InlineData(new int[] { 10, 13, 12, 14, 15 }, 2)]
     [InlineData(new int[] { 2, 3, 1, 1, 4 }, 3)]
     [InlineData(new int[] { 5, 1, 3, 4, 2 }, 3)]
+    [InlineData(new int[] { 1, 2, 3, 2, 1, 4, 4, 5 }, 6)]
     public void Given_WhenThreeSum_Then1(int[] arr, int expected)
     {
         // Given
